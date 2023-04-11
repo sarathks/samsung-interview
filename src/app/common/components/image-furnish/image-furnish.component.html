@@ -1,0 +1,16 @@
+<div class="annotation-wrapper">
+    <input type="file" (change)="selectFile($event)">
+    <div ngClass="{{ url ? 'annotation-image-wrapper' : '' }}">
+        <img #annotate src="{{url}}" *ngIf="url" (load)="initializeAnnotationLibrary()">
+    </div>
+
+    <div class="annotation-controls">
+        <button class="save-btn" (click)="save()">{{GENERAL_TEXTS.SAVE}}</button>
+        <button class="clear-all-btn" (click)="clear()">{{GENERAL_TEXTS.CLEAR_ALL}}</button>
+    </div>
+
+    <div class="annotations-list" *ngFor="let annotation of annotations; trackBy:trackAnnotation">
+        <span>{{ annotation.body[0].value }}</span>
+        <span><button class="annotation-del-close" (click)="delete(annotation.id)">X</button></span>
+    </div>
+</div>
